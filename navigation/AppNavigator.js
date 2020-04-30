@@ -1,7 +1,12 @@
 import React from 'react';
-import { Text } from 'react-native';
+import { Text, View, StyleSheet } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Ionicons } from '@expo/vector-icons';
+
+import OrderScreen from '../screens/OrderScreen';
+import ViewOrderScreen from '../screens/ViewOrderScreen';
+import UserProfileScreen from '../screens/UserProfileScreen';
+
 
 import Colors from '../constants/colors';
 
@@ -9,15 +14,27 @@ import Colors from '../constants/colors';
 // create navigator component
 const BlankView = () => {
   return (
-    <Text>Hellooooo</Text>
+    <View style={styles.container}>
+      <Text>Yassss Hello World!</Text>
+    </View>
   )
 }
+
+const styles = StyleSheet.create({
+    container: {
+      flex: 1,
+      backgroundColor: '#fff',
+      alignItems: 'center',
+      justifyContent: 'center',
+    },
+  });
+  
 
 
 // Creating my Tab Stack
 const Tabs = createBottomTabNavigator();
 
-const MealTabNavigator = () => {
+const TabNavigator = () => {
   return (
     <Tabs.Navigator
       tabBarOptions={{
@@ -29,26 +46,34 @@ const MealTabNavigator = () => {
         component={BlankView}
         options={() => ({
           tabBarIcon: ({ color }) => 
-            <Ionicons name='md-restaurant' size={25} color={color} />
+            <Ionicons name='ios-restaurant' size={25} color={color} />
+        })} />
+      
+      <Tabs.Screen
+        name='New Order'
+        component={OrderScreen}
+        options={() => ({
+          tabBarIcon: ({ color }) =>
+            <Ionicons name='ios-pizza' size={25} color={color} />
         })} />
 
       <Tabs.Screen
-        name='Favorites'
-        component={BlankView}
+        name='View Orders'
+        component={ViewOrderScreen}
         options={() => ({
           tabBarIcon: ({ color }) =>
-            <Ionicons name='ios-heart' size={25} color={color} />
+            <Ionicons name='ios-list' size={25} color={color} />
         })} />
 
       <Tabs.Screen
-        name='Orders'
-        component={BlankView}
+        name='Profile'
+        component={UserProfileScreen}
         options={() => ({
           tabBarIcon: ({ color }) =>
-            <Ionicons name='ios-basket' size={25} color={color} />
+            <Ionicons name='ios-person' size={25} color={color} />
         })} />
     </Tabs.Navigator>
   )
 }
 
-export default MealTabNavigator;
+export default TabNavigator;
